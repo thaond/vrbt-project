@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram-geometry>
+    <grid>
+        <visible>true</visible>
+    </grid>
+    <guides>
+        <visible>false</visible>
+    </guides>
+    <node>
+        <id>Entity#VideoEntry</id>
+        <bounds x="36" y="36"/>
+    </node>
+    <node>
+        <id>Entity#CategoryEnty</id>
+        <bounds x="50" y="50"/>
+    </node>
+    <node>
+        <id>Entity#CategoryVideoEntry</id>
+        <bounds x="150" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ViolationEntry</id>
+        <bounds x="250" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ViolationVideoEntry</id>
+        <bounds x="350" y="50"/>
+    </node>
+    <node>
+        <id>Entity#VideoUserTransactionEntry</id>
+        <bounds x="450" y="50"/>
+    </node>
+    <node>
+        <id>Entity#RatingEntry</id>
+        <bounds x="550" y="50"/>
+    </node>
+    <node>
+        <id>Entity#FolderEntry</id>
+        <bounds x="650" y="50"/>
+    </node>
+    <node>
+        <id>Entity#VideoUserVideoGroupEntry</id>
+        <bounds x="750" y="50"/>
+    </node>
+    <node>
+        <id>Entity#VideoUserEntry</id>
+        <bounds x="850" y="50"/>
+    </node>
+    <node>
+        <id>Entity#UserEntry</id>
+        <bounds x="950" y="50"/>
+    </node>
+    <node>
+        <id>Entity#VideoUserContactEntry</id>
+        <bounds x="1050" y="50"/>
+    </node>
+    <node>
+        <id>Entity#VideoGroupEntry</id>
+        <bounds x="1150" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ContactGroupVideoGroupEntry</id>
+        <bounds x="1250" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ServiceEntry</id>
+        <bounds x="1350" y="50"/>
+    </node>
+    <node>
+        <id>Entity#UserServiceEntry</id>
+        <bounds x="1450" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ContactEntry</id>
+        <bounds x="1550" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ContactGroupContactEntry</id>
+        <bounds x="1650" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ContactGroupEntry</id>
+        <bounds x="1750" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ServiceTransactionEntry</id>
+        <bounds x="1850" y="50"/>
+    </node>
+    <node>
+        <id>Entity#ServicePackageEntry</id>
+        <bounds x="1950" y="50"/>
+    </node>
+    <node>
+        <id>Entity#NotificationEntry</id>
+        <bounds x="2050" y="50"/>
+    </node>
+</diagram-geometry>

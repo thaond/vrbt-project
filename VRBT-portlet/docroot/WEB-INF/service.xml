@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<service-builder package-path="vn.com.fis.portal">
+	<author>loind</author>
+	<namespace>VRBTPortal</namespace>
+
+	<entity name="VideoEntry"  table="TBL_VIDEO" local-service="true" remote-service="true">
+		<column name="videoId" type="long" primary="true" />
+		<!-- Audit fields -->
+		<column name="videoName" type="String" />
+		<column name="description" type="String" />
+		<column name="videoUrl" type="String" />
+		<column name="viewCount" type="long" />
+		<column name="date_" type="Date" />
+		<column name="smallImageUrl" type="String" />
+		<column name="largeImageUrl" type="String" />
+		<column name="accessModifier" type="int" />
+		<column name="uploaderId" type="long" />
+		<column name="folderId" type="long" />
+		<column name="status" type="int" />
+		
+
+		<order by="asc">
+			<order-column name="videoName" />
+			<order-column name="date_" />
+		</order>
+		<!-- Finder methods -->
+
+		
+		<finder name="DateUpload" return-type="Collection">
+			<finder-column name="date_" />
+		</finder>
+		<finder name="UploaderId" return-type="Collection">
+			<finder-column name="uploaderId" />
+		</finder>
+		
+		<finder name="UploaderId_Folder" return-type="Collection">
+			<finder-column name="uploaderId" />
+			<finder-column name="folderId" />
+		</finder>
+	</entity>
+	
+	<entity name="CategoryEnty"  table="TBL_CATEGORY" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+		<column name="categoryId" type="long" primary="true" />
+		<!-- Audit fields -->
+		<column name="categoryName" type="String" />
+		<column name="description" type="String" />
+		<column name="status" type="int" />
+		<!-- Order -->
+		<!-- <column name="videoEntries" type="Collection" entity="VideoEntry" mapping-table="TBL_CATEGORY_VIDEO" /> -->
+		
+		<order by="asc">
+			<order-column name="categoryName" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="CategoryName" return-type="Collection">
+			<finder-column name="categoryName" />
+		</finder>
+	</entity>
+	<entity name="CategoryVideoEntry"  table="TBL_CATEGORY_VIDEO" local-service="true" remote-service="true">
+		<!-- PK fields -->
+		<column name="categoryViceoId" type="long" primary="true" />
+
+		<!-- relationship fields -->
+		<column name="categoryId" type="long" />
+		<column name="videoId" type="long" />
+		 
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="categoryViceoId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="C_V" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="videoId" />
+		</finder>
+	</entity>
+	<entity name="ViolationEntry"  table="TBL_VIOLATION" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="violationId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="violationTitle" type="String" />
+		<column name="description" type="String" />
+		<column name="status" type="int" />
+		<!-- Order -->
+		<!-- <column name="videoEntries" type="Collection" entity="VideoEntry" mapping-table="TBL_VIOLATION_VIDEO" /> -->
+		
+		
+		<order by="asc">
+			<order-column name="violationTitle" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Title" return-type="Collection">
+			<finder-column name="violationTitle" />
+		</finder>
+	</entity>
+	<entity name="ViolationVideoEntry"  table="TBL_VIOLATION_VIDEO" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="violationVideoId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="violationId" type="long" />
+		<column name="videoId" type="long" />
+		<column name="userId" type="long" />
+		
+		<column name="date_" type="Date" />
+		<column name="description" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="date_" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="VideoId_UserId" return-type="Collection">
+			<finder-column name="videoId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="Video_User_Violation" return-type="ViolationVideoEntry">
+			<finder-column name="videoId" />
+			<finder-column name="userId" />
+			<finder-column name="violationId" />
+		</finder>
+	</entity>
+	<entity name="VideoUserTransactionEntry"  table="TBL_VIDEO_USER_TRANSACTION" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="transactionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="transactionCode" type="long" />
+		<column name="date_" type="Date" />
+
+		<column name="videoId" type="long" />
+		<column name="userId" type="long" />
+		<column name="receiverId" type="long" />
+		
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="date_" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="TransactionCode" return-type="Collection">
+			<finder-column name="transactionCode" />
+		</finder>
+		<finder name="Date" return-type="Collection">
+			<finder-column name="date_" />
+		</finder>
+		<finder name="TransactionCode_Date" return-type="Collection">
+			<finder-column name="transactionCode" />
+			<finder-column name="date_" />
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="VideoId" return-type="Collection">
+			<finder-column name="videoId" />
+		</finder>
+		<finder name="receiverId" return-type="Collection">
+			<finder-column name="receiverId" />
+		</finder>
+	</entity>	
+	<entity name="RatingEntry"  table="TBL_RATING" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="ratingId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="videoId" type="long" />
+		<column name="userId" type="long" />
+		<column name="code" type="int" />
+		<column name="date_" type="Date" />
+		<!-- Order -->
+		
+		<order by="asc">
+			<order-column name="date_" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="VideoId" return-type="Collection">
+			<finder-column name="videoId" />
+		</finder>
+		<finder name="Date" return-type="Collection">
+			<finder-column name="date_" />
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		
+		<finder name="RatingCode" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+		
+		<finder name="Code_Video" return-type="Collection">
+			<finder-column name="code" />
+			<finder-column name="videoId" />
+		</finder>
+		<finder name="User_Video_Code" return-type="RatingEntry">
+			<finder-column name="userId" />
+			<finder-column name="videoId" />
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	<entity name="FolderEntry"  table="TBL_FOLDER" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="folderId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="folderName" type="String" />
+		<column name="description" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		<column name="folderIdParent" type="long"  />
+		<column name="userId" type="long" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="folderName" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="FolderName" return-type="Collection">
+			<finder-column name="folderName" />
+		</finder>
+		<finder name="FolderIdParent" return-type="Collection">
+			<finder-column name="folderIdParent" />
+		</finder>
+	 	<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
+	<entity name="VideoUserVideoGroupEntry"  table="TBL_VIDEO_USER_VIDEO_GROUP" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="videoUserVideoGroupID" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="videoUserId" type="long" />
+		<column name="videoGroupId" type="long" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="videoUserVideoGroupID" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="VideoUser_VideoGroup" return-type="VideoUserVideoGroupEntry">
+			<finder-column name="videoUserId" />
+			<finder-column name="videoGroupId" />
+		</finder>
+		 
+	</entity>	 
+	<entity name="VideoUserEntry"  table="TBL_VIDEO_USER" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="videoUserId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="videoId" type="long" />
+		<column name="userId" type="long" />
+		<column name="originCode" type="int" />
+		<column name="date_" type="Date" />
+		<column name="startDate" type="Date" />
+		<column name="endDate" type="Date" />
+		<column name="senderId" type="long" />
+		<column name="status" type="int" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="date_" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserId_VideoId" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="videoId" />
+		</finder>
+	</entity>
+	<entity name="UserEntry"  table="TBL_USER" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="userId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="userName" type="String" />
+
+		<column name="mobileNumber" type="long" />
+		<column name="companyId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		<column name="status" type="int" />
+		<!-- Order -->
+		
+		
+		
+		<order by="asc">
+			<order-column name="userName" />
+			<order-column name="mobileNumber" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserName" return-type="UserEntry">
+			<finder-column name="userName" />
+		</finder>
+		<finder name="MobileNumber" return-type="UserEntry">
+			<finder-column name="mobileNumber" />
+		</finder>
+		<finder name="UserId" return-type="UserEntry">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
+	<entity name="VideoUserContactEntry"  table="TBL_VIDEO_USER_CONTACT" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="videoUserContactId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="videoUserId" type="long" />
+
+		<column name="contactId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="startTime" type="Date" />
+		<column name="endTime" type="Date" />
+		<column name="priority" type="int" />
+		<column name="status" type="int" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="priority" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="ContactId_VideoUserId" return-type="Collection">
+			<finder-column name="contactId" />
+			<finder-column name="videoUserId" />
+		</finder>
+	</entity>
+	<entity name="VideoGroupEntry"  table="TBL_VIDEO_GROUP" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="videoGroupId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="videoGroupName" type="String" />
+		<column name="description" type="String" />
+		 
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="videoGroupName" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="GroupName" return-type="Collection">
+			<finder-column name="videoGroupName" />
+		</finder>
+	</entity>
+	<entity name="ContactGroupVideoGroupEntry"  table="TBL_CONTACT_GROUP_VIDEO_GROUP" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="contactGroupVideoGroupEntryId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="contactGroupId" type="long" />
+		<column name="videoGroupId" type="long" />
+		 
+		<!-- Order -->
+	 
+		<!-- Finder methods -->
+		<finder name="ContactGroup_VideoGroup" return-type="ContactGroupVideoGroupEntry">
+			<finder-column name="contactGroupId" />
+			<finder-column name="videoGroupId" />
+		</finder>
+		<finder name="ContactGroup" return-type="Collection">
+			<finder-column name="contactGroupId" />
+		</finder>
+		<finder name="VideoGroup" return-type="Collection">
+			<finder-column name="videoGroupId" />
+		</finder>
+	</entity>
+	<entity name="ServiceEntry"  table="TBL_SERVICE" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="serviceId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="serviceCode" type="String" />
+		<column name="serviceName" type="String" />
+		<column name="description" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<column name="status" type="int" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="serviceName" />
+			<order-column name="serviceCode" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="serviceCode" return-type="ServiceEntry">
+			<finder-column name="serviceCode" />
+		</finder>
+		 
+	</entity>
+	<entity name="UserServiceEntry"  table="TBL_USER_SERVICE" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="userServiceId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="userId" type="long" />
+		<column name="serviceId" type="long" />
+		<column name="serviceStatus" type="int" />
+		<column name="serviceStartDate" type="Date" />
+		<column name="serviceStopDate" type="Date" />
+				
+		<column name="servicePackageId" type="long" />
+		<column name="packageDate" type="Date" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="serviceId" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserId_ServiceId" return-type="UserServiceEntry">
+			<finder-column name="userId" />
+			<finder-column name="serviceId" />
+		</finder>
+		<finder name="UserId_ServicePackageId" return-type="UserServiceEntry">
+			<finder-column name="userId" />
+			<finder-column name="servicePackageId" />
+		</finder>
+		<finder name="UserId_ServiceId_PackageId" return-type="UserServiceEntry">
+			<finder-column name="userId" />
+			<finder-column name="serviceId" />
+			<finder-column name="servicePackageId" />
+		</finder>
+	</entity>
+	<entity name="ContactEntry"  table="TBL_CONTACT" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="contactId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="contactName" type="String" />
+		<column name="mobileNumber" type="String" />
+		<column name="userId" type="long" />
+		 
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="contactName" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserId_MobileNumber" return-type="ContactEntry">
+			<finder-column name="userId" />
+			<finder-column name="mobileNumber" />
+		</finder>
+	</entity>
+	<entity name="ContactGroupContactEntry"  table="TBL_CONTACT_GROUP_CONTACT" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="contactGroupContactId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="contactId" type="String" />
+		<column name="contactGroupId" type="String" />
+		 
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="contactId" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="ContactId_ContactGroupId" return-type="ContactGroupContactEntry">
+			<finder-column name="contactId" />
+			<finder-column name="contactGroupId" />
+		</finder>
+	</entity>
+	<entity name="ContactGroupEntry"  table="TBL_CONTACT_GROUP" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="contactGroupId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="contactGroupName" type="String" />
+		<column name="description" type="String" />
+		<column name="contactGroupType" type="int" />
+		<column name="userId" type="long" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="contactGroupName" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="UserId_ContactGroupId" return-type="ContactGroupEntry">
+			<finder-column name="userId" />
+			<finder-column name="contactGroupId" />
+		</finder>
+	</entity>
+	<entity name="ServiceTransactionEntry"  table="TBL_SERVICE_TRANSACTION" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="transactionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="transactionCode" type="int" />
+		<column name="date_" type="Date" />
+		
+		<column name="userId" type="long" />
+		<column name="serviceId" type="long" />
+		<column name="serviceStatus" type="int" />
+		<column name="serviceStartDate" type="Date" />
+		<column name="serviceEndDate" type="Date" />
+		
+		<column name="servicePackageId" type="long" />
+		<column name="packageDate" type="Date" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="date_" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Date" return-type="Collection">
+			<finder-column name="date_" />
+		</finder>
+		<finder name="TransactionCode" return-type="Collection">
+			<finder-column name="transactionCode" />
+		</finder>
+		<finder name="TransactionCode_Date" return-type="Collection">
+			<finder-column name="transactionCode" />
+			<finder-column name="date_" />
+		</finder>
+		<finder name="UserId_TransactionCode_Date" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="transactionCode" />
+			<finder-column name="date_" />
+		</finder>
+		
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
+	<entity name="ServicePackageEntry"  table="TBL_SERVICE_PACKAGE" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="servicePackageId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="servicePackageName" type="String" />
+		<column name="servicePackageCode" type="String" />
+		
+		<column name="description" type="String" />
+		<column name="totalFile" type="int" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<column name="serviceId" type="long" />
+		<column name="status" type="int" />
+		
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="servicePackageName" />
+		</order>
+
+		<!-- Finder methods -->	 
+	</entity>
+	<entity name="NotificationEntry"  table="TBL_NOTIFICATION" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+		<column name="notificationId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="userIdFrom" type="long" />
+		<column name="userIdTo" type="long" />
+		
+		<column name="subject" type="String" />
+		<column name="message" type="String" />
+		
+		<column name="createDate" type="Date" />
+		
+		<column name="status" type="int" />
+		
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserIdFrom_UserIdTo" return-type="Collection">
+			<finder-column name="userIdFrom" />
+			<finder-column name="userIdTo" />
+		</finder>	 
+	</entity>
+</service-builder>

@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.VRBTPortal", "vn.com.fis.portal.service", "VRBT-portlet");
